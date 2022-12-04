@@ -1,5 +1,7 @@
 package pe.edu.tecsup.springbootapp.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "productos")
@@ -32,6 +36,9 @@ public class Producto {
 
 	private Integer estado;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date creado;
+	
 	@ManyToOne
 	@JoinColumn(name="categorias_id") // FK
 	private Categoria categoria;
@@ -84,6 +91,16 @@ public class Producto {
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
+	
+	
+
+	public Date getCreado() {
+		return creado;
+	}
+
+	public void setCreado(Date creado) {
+		this.creado = creado;
+	}
 
 	public String getImagen_nombre() {
 		return imagen_nombre;
@@ -121,9 +138,10 @@ public class Producto {
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
 				+ ", stock=" + stock + ", imagen_nombre=" + imagen_nombre + ", imagen_tipo=" + imagen_tipo
-				+ ", imagen_tamanio=" + imagen_tamanio + ", estado=" + estado + "]";
+				+ ", imagen_tamanio=" + imagen_tamanio + ", estado=" + estado + ", creado=" + creado + "]";
 	}
-	
+
+
 	
 
 }

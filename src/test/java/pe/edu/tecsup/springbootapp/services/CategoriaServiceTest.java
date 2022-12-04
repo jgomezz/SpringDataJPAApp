@@ -2,6 +2,7 @@ package pe.edu.tecsup.springbootapp.services;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import pe.edu.tecsup.springbootapp.entities.Categoria;
-import pe.edu.tecsup.springbootapp.entities.Producto;
 
 @SpringBootTest
 class CategoriaServiceTest {
@@ -26,38 +26,22 @@ class CategoriaServiceTest {
 	@Test
 	void testListar() throws Exception {
 		
-		List<Categoria> cats = categoriaService.findAll();
+		List<Categoria> cats = null;
 		
-		log.info(">>>>" + cats.toString());
+		try {
+			
+			cats = categoriaService.findAll();
+			cats.stream().forEach(item -> log.info(item.toString()));
+			
+		} catch (Exception e) {
+			
+			fail("Exception " + e.getMessage());
 		
-		assertThat(cats.isEmpty(), is(false));
-		//assertThat(cats.size(), is(3));
-
-	}
-	
-	@Test
-	void testDummy() throws Exception {
-		
-		List<Categoria> categorias = categoriaService.findAll();
-
-		log.info("Print by foreach");
-		for(Categoria cat : categorias) log.info(cat.toString());
-				
-		log.info("Print by stream");
-		categorias.stream().forEach(item -> log.info(item.toString()));
-		
-		log.info(" - Lista de categorias -------------- ");
-		for (Categoria categoria : categorias) {
-			log.info("---> " + categoria);
-			log.info(" - Lista de producto por categoria -------------- ");
-			for (Producto producto : categoria.getProductos()) {
-				log.info("-------> " + producto);
-			}
 		}
-		log.info(" ----------------------------------- ");
 
+		// Test validation..!
+		assertThat(cats.isEmpty(), is(false));
 
 	}
-
 	
 }

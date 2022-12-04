@@ -2,7 +2,9 @@ package pe.edu.tecsup.springbootapp.services;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -23,99 +25,118 @@ class ProductoServiceTest {
 	@Autowired
 	private ProductoService productoService;
 	
+
 	@Test
-	void testListar() throws Exception {
-		
-		List<Producto> cats = productoService.findAll();
-		
-		log.info(">>>>" + cats.toString());
-		
-		assertThat(cats.isEmpty(), is(false));
-		//assertThat(cats.size(), is(3));
+	void testListar() {
 
-	}
-	
-	@Test
-	void testDummy() throws Exception {
-		
-		List<Producto> cats = productoService.findAll();
+		List<Producto> prods = null;
 
-		log.info("Print by foreach");
-		for(Producto cat : cats) log.info(cat.toString());
-				
-		log.info("Print by stream");
-		cats.stream().forEach(item -> log.info(item.toString()));
-		
-		
-	}
-	
-	@Test
-	void testfindById() throws Exception {
-		
-		// buscanod productos
-		Long id = 35L;
-		Producto prod = productoService.findById(id);
-		log.info(prod.toString());
-		
-		assertThat(prod.getNombre(), is("Kingstone"));
-	}
-	
-	
-	
+		try {
+			prods = productoService.findAll();
 
-	
-	@Test
-	public void testRegistar() throws Exception {
-		
-		List<Producto> productos = productoService.findAll();
-		int totalAntes = productos.size();
-		
-		Producto productoNuevo = new Producto();
-		
-		// Forma de asignar una categoria
-		Categoria categoria = new Categoria();
-		categoria.setId(1L);
-		productoNuevo.setCategoria(categoria);
+			// stream
+			prods.stream().forEach(item -> log.info(item.toString()));
 
-		productoNuevo.setNombre("AMD");
-		productoNuevo.setDescripcion("AMD X21");
-		productoNuevo.setPrecio(280.0);
-		productoNuevo.setStock(6);
-		productoNuevo.setEstado(1);
+		} catch (Exception e) {
 
-		// Graba	
-		productoService.save(productoNuevo);	
-		
-		// Vuelve a leer todos los registros
-		productos = productoService.findAll();
-		int totalDespues = productos.size();
-		
-		assertThat(totalDespues - totalAntes, is(1));
-	}
-	
-	@Test
-	public void testEliminar() throws Exception {
-		
-		List<Producto> productos = productoService.findAll();
+			fail("Exception " + e.getMessage());
 
-		int totalAntes = productos.size();
-		
-		if (productos.isEmpty()) {
-			return; // test pass
 		}
 
-		// Obtiene el último producto
-		Producto ultimoProducto = productos.get(productos.size() - 1);
-		productoService.deleteById(ultimoProducto.getId());
+		// Test validation..!
+		assertThat(prods.isEmpty(), is(false));
 
-		// Elimina el producto
-		productos = productoService.findAll();
+	}
 
-		// Vuelve a leer los datos
-		int totalDespues = productos.size();
+	@Test
+	void testBuscarPorId() {
+
+		Producto prod = null;
+		Long ID_BUSCAR = 1L;
+		String NOMBRE_ESPERADO = "Kingstone";
+		String DESCRIPCION_ESPERADO = "Procesador Intel Core I7-8700 Lga 1151 8va";
+		Double PRECIO_ESPERADO = 1479.99;
 		
-		assertThat(totalAntes - totalDespues, is(1));
+		try {
+			prod = productoService.findById(ID_BUSCAR);
+		} catch (Exception e) {
+			fail("Exception " + e.getMessage());
+		}
+
+		// Test validation..!
+		assertThat(prod.getNombre(), is(NOMBRE_ESPERADO));
+		assertThat(prod.getDescripcion(), is(DESCRIPCION_ESPERADO));
+		assertThat(prod.getPrecio(), is(PRECIO_ESPERADO));
+
+	}
 	
+	
+	@Test
+	void testRegistrar() {
+
+		Categoria categoria = new Categoria();
+		categoria.setId(1L);
+		
+		Producto nuevoProducto = new Producto();
+		nuevoProducto.setCategoria(categoria);
+		nuevoProducto.setNombre("AMD");
+		nuevoProducto.setDescripcion("AMD X10");
+		nuevoProducto.setPrecio(280.0);
+		nuevoProducto.setCreado(new Date());
+		nuevoProducto.setStock(6);
+		nuevoProducto.setEstado(1);
+		
+
+		try {
+
+			List<Producto> productos = productoService.findAll();
+			int totalAntes = productos.size();
+
+			productoService.save(nuevoProducto);
+
+			productos = productoService.findAll();
+			int totalDespues = productos.size();
+
+			assertThat(totalDespues - totalAntes, is(1));
+
+		} catch (Exception e) {
+
+			fail("Exception " + e.getMessage());
+
+		}
+
+	}
+
+	@Test
+	void testEliminar() {
+		
+		try {
+		
+			List<Producto> productos = productoService.findAll(); 
+			
+			int totalAntes = productos.size();
+			
+			if (productos.isEmpty()) {
+				return; // test pass 
+			}
+			
+			Producto ultimoProducto = productos.get(productos.size() - 1);
+			
+			productoService.deleteById(ultimoProducto.getId()); 
+			
+			// Lee nuevamente
+			productos = productoService.findAll();
+			
+			int totalDespues = productos.size();
+			
+			// Validacion
+			assertThat(totalAntes - totalDespues, is(1));
+		
+		} catch (Exception e) {
+
+			fail("Exception " + e.getMessage());
+
+		}		
 	}
 
 }
