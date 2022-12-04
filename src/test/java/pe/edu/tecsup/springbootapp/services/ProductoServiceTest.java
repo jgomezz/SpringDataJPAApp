@@ -68,9 +68,20 @@ class ProductoServiceTest {
 		assertThat(prod.getDescripcion(), is(DESCRIPCION_ESPERADO));
 		assertThat(prod.getPrecio(), is(PRECIO_ESPERADO));
 
-	}
+	}	
 	
-	
+	@Test
+	void testfindByName() throws Exception {
+		
+		List<Producto> productos = productoService.findByNameLike("Intel");
+		
+		//log.info(">>>>" + productos.toString());
+		productos.stream().forEach(item -> log.info(item.toString()));
+		
+		assertThat(productos.isEmpty(), is(true));
+		//assertThat(cats.size(), is(3));
+	}	
+
 	@Test
 	void testRegistrar() {
 

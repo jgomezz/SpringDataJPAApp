@@ -8,6 +8,8 @@ public interface ProductoService {
 
 	List<Producto> findAll();
 
+	List<Producto> findByNameLike(String nombre);
+
 	Producto findById(Long id);
 
 	Producto save(Producto producto);

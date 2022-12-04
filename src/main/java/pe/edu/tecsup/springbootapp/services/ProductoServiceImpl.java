@@ -49,5 +49,12 @@ public class ProductoServiceImpl implements ProductoService {
 	
 	}
 
+	@Override
+	public List<Producto> findByNameLike(String nombre) {
+		
+		return productoRepository.findByNameLike(nombre);
+		
+	}
+
 	
 }
