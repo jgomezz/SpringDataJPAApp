@@ -27,7 +27,7 @@ class ProductoServiceTest {
 	
 
 	@Test
-	void testListar() {
+	void testFindAll() {
 
 		List<Producto> prods = null;
 
@@ -49,7 +49,7 @@ class ProductoServiceTest {
 	}
 
 	@Test
-	void testBuscarPorId() {
+	void testFindById() {
 
 		Producto prod = null;
 		Long ID_BUSCAR = 1L;
@@ -71,7 +71,7 @@ class ProductoServiceTest {
 	}	
 	
 	@Test
-	void testfindByName() throws Exception {
+	void testFindByName() throws Exception {
 		
 		List<Producto> productos = productoService.findByNameLike("Intel");
 		
@@ -83,7 +83,7 @@ class ProductoServiceTest {
 	}	
 
 	@Test
-	void testRegistrar() {
+	void testSave() {
 
 		Categoria categoria = new Categoria();
 		categoria.setId(1L);
@@ -119,7 +119,7 @@ class ProductoServiceTest {
 	}
 
 	@Test
-	void testEliminar() {
+	void testDeleteById() {
 		
 		try {
 		

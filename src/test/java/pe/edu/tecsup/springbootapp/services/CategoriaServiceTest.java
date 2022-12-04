@@ -24,7 +24,7 @@ class CategoriaServiceTest {
 	CategoriaService categoriaService;
 	
 	@Test
-	void testListar() throws Exception {
+	void testFindAll() throws Exception {
 		
 		List<Categoria> cats = null;
 		
