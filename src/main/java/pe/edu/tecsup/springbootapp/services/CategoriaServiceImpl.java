@@ -16,9 +16,9 @@ public class CategoriaServiceImpl implements CategoriaService {
 	private static Logger log 
 		= LoggerFactory.getLogger(CategoriaServiceImpl.class);
 	
-	// Inyeccion por constructor
+	// Inyeccion de dependencias por constructor
 	
-	private CategoriaRepository categoriaRepository;
+	private final CategoriaRepository categoriaRepository;
 	
 	public CategoriaServiceImpl( CategoriaRepository x) {
 		this.categoriaRepository = x;
