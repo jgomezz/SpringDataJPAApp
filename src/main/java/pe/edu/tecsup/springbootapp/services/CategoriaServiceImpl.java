@@ -16,8 +16,14 @@ public class CategoriaServiceImpl implements CategoriaService {
 	private static Logger log 
 		= LoggerFactory.getLogger(CategoriaServiceImpl.class);
 	
-	@Autowired
+	// Inyeccion por constructor
+	
 	private CategoriaRepository categoriaRepository;
+	
+	public CategoriaServiceImpl( CategoriaRepository x) {
+		this.categoriaRepository = x;
+	}
+	
 	
 	@Override
 	public List<Categoria> findAll() {

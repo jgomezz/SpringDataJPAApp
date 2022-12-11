@@ -23,6 +23,7 @@ class CategoriaServiceTest {
 	@Autowired
 	CategoriaService categoriaService;
 	
+	
 	@Test
 	void testFindAll() throws Exception {
 		
