@@ -1,7 +1,7 @@
 package pe.edu.tecsup.springbootapp.services;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Date;
@@ -43,8 +43,8 @@ class ProductoServiceTest {
 
 		}
 
-		// Test validation..!
-		assertThat(prods.isEmpty(), is(false));
+		// EXPECTED CURRENT
+		assertEquals(false, prods.isEmpty());
 
 	}
 
@@ -64,9 +64,9 @@ class ProductoServiceTest {
 		}
 
 		// Test validation..!
-		assertThat(prod.getNombre(), is(NOMBRE_ESPERADO));
-		assertThat(prod.getDescripcion(), is(DESCRIPCION_ESPERADO));
-		assertThat(prod.getPrecio(), is(PRECIO_ESPERADO));
+		assertEquals(NOMBRE_ESPERADO, prod.getNombre());
+		assertEquals(DESCRIPCION_ESPERADO, prod.getDescripcion());
+		assertEquals(PRECIO_ESPERADO, prod.getPrecio());
 
 	}	
 	
@@ -78,8 +78,8 @@ class ProductoServiceTest {
 		//log.info(">>>>" + productos.toString());
 		productos.stream().forEach(item -> log.info(item.toString()));
 		
-		assertThat(productos.isEmpty(), is(true));
-		//assertThat(cats.size(), is(3));
+		assertEquals(true, productos.isEmpty());
+
 	}	
 
 	@Test
@@ -108,7 +108,7 @@ class ProductoServiceTest {
 			productos = productoService.findAll();
 			int totalDespues = productos.size();
 
-			assertThat(totalDespues - totalAntes, is(1));
+			assertEquals(1, totalDespues - totalAntes);
 
 		} catch (Exception e) {
 
@@ -141,8 +141,8 @@ class ProductoServiceTest {
 			int totalDespues = productos.size();
 			
 			// Validacion
-			assertThat(totalAntes - totalDespues, is(1));
-		
+			assertEquals(1, totalAntes - totalDespues);
+
 		} catch (Exception e) {
 
 			fail("Exception " + e.getMessage());
