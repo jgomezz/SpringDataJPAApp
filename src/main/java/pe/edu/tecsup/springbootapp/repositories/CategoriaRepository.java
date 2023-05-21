@@ -12,10 +12,5 @@ public interface CategoriaRepository
 
 	// CRUD : Create, Read , Update and Delete 
 	
-	@Override
-	List<Categoria> findAll();
-
-	@Override
-	Optional<Categoria> findById(Long id);
 	
 }
