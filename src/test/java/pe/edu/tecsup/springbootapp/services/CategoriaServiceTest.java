@@ -22,19 +22,15 @@ class CategoriaServiceTest {
 	@Autowired
 	CategoriaService categoriaService;
 	
-	
 	@Test
 	void testFindAll() throws Exception {
 		
 		List<Categoria> cats = null;
 		
 		try {
-			
 			cats = categoriaService.findAll();
 			cats.stream().forEach(item -> log.info(item.toString()));
-			
 		} catch (Exception e) {
-			
 			fail("Exception " + e.getMessage());
 		
 		}
