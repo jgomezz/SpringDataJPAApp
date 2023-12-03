@@ -1,6 +1,7 @@
 package pe.edu.tecsup.springbootapp.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class ProductoServiceImpl implements ProductoService {
 	private ProductoRepository productoRepository;
 	
 	@Override
-	public List<Producto> findAll() {
+	public List<Producto> findAll() throws Exception {
 
 		log.info("calling services ....!") ;
 		
@@ -29,21 +30,28 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public Producto findById(Long id) {
+	public Producto findById(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		log.info("call findById(id: " + id + ")");
 		
-		return productoRepository.findById(id).get();
-	
-	}
+		Optional<Producto> optionalProd 
+			= productoRepository.findById(id);
+		
+		if ( optionalProd.isPresent())
+			return optionalProd.get();
+		else
+			throw new Exception("Not found record...!");
+	}  
 
 	@Override
-	public Producto save(Producto producto) {
+	public Producto save(Producto producto) throws Exception {
 
 		return productoRepository.save(producto);
 	
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Long id) throws Exception {
 
 		productoRepository.deleteById(id);
 	

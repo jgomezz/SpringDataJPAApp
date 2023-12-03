@@ -6,14 +6,14 @@ import pe.edu.tecsup.springbootapp.entities.Producto;
 
 public interface ProductoService {
 
-	List<Producto> findAll();
+	List<Producto> findAll()  throws Exception;;
 
-	List<Producto> findByNameLike(String nombre);
+	List<Producto> findByNameLike(String nombre)  throws Exception;;
 
-	Producto findById(Long id);
+	Producto findById(Long id)  throws Exception;;
 
-	Producto save(Producto producto);
+	Producto save(Producto producto)  throws Exception;;
 
-	void deleteById(Long id);
+	void deleteById(Long id)  throws Exception;;
 
 }
