@@ -130,24 +130,23 @@ public class ProductoServiceTest {
 		String NOMBRE_A_CAMBIAR = "Kingstone Cambiado" ;
 		Producto prod = null;
 
-		// Actualizar
-		productoService.update(id, NOMBRE_ORIGINAL);
-
-		// Buscar el producto
+		// Actualizar nombre original
 		prod = productoService.findById(id);
+		prod.setNombre(NOMBRE_ORIGINAL);
+		productoService.update(prod);
 
 		// Verificar que el nombre ha sido cambiado
+		prod = productoService.findById(id);
 		assertEquals(NOMBRE_ORIGINAL, prod.getNombre());
 
-		// Actualizar
-		productoService.update(id, NOMBRE_A_CAMBIAR);
-
-		// Buscar el producto
-		prod = productoService.findById(id);
+		// Actualizar nombre a cambiar
+		//prod = productoService.findById(id);
+		prod.setNombre(NOMBRE_A_CAMBIAR);
+		productoService.update(prod);
 
 		// Verificar que el nombre ha sido cambiado
-		assertEquals(NOMBRE_A_CAMBIAR,prod.getNombre());
-
+		prod = productoService.findById(id);
+		assertEquals(NOMBRE_A_CAMBIAR, prod.getNombre());
 	}
 
 }
