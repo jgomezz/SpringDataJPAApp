@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pe.edu.tecsup.springbootapp.entities.Categoria;
 import pe.edu.tecsup.springbootapp.entities.Producto;
 
 import java.util.List;
@@ -66,13 +67,18 @@ public class ProductoServiceTest {
 		List<Producto> productos = productoService.findAll();
 		int totalAntes = productos.size();
 
+		// Preparar el producto
 		Producto producto = new Producto();
-		//producto.setCategorias_id(1L);
 		producto.setNombre("NVIDIA` GPU");
 		producto.setDescripcion("NVIDIA GPU 1080-TI");
 		producto.setPrecio(2000.0);
 		producto.setStock(6);
 		producto.setEstado(1);
+
+		// Asigno categoria al producto
+		Categoria categoria = new Categoria();
+		categoria.setId(1L);
+		producto.setCategoria(categoria);
 
 		// Crea el producto
 		productoService.save(producto);
