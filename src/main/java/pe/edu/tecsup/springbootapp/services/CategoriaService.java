@@ -11,4 +11,6 @@ public interface CategoriaService {
 
     List<Categoria> findAll() throws Exception;
 
+    List<Categoria> findByName(String name) throws Exception;
+
 }

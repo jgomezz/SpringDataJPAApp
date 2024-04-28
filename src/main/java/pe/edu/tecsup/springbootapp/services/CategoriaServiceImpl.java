@@ -28,4 +28,8 @@ public class CategoriaServiceImpl implements CategoriaService{
         return this.categoriaRepository .findAll();
     }
 
+    @Override
+    public List<Categoria> findByName(String name) throws Exception {
+        return this.categoriaRepository.findByNombre(name);
+    }
 }

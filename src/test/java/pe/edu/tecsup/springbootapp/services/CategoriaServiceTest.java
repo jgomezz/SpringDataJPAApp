@@ -35,4 +35,20 @@ class CategoriaServiceTest {
         assertEquals(VALUE_EXPECTED, categorias.isEmpty());
 
     }
+
+    @Test
+    void testFindByName() throws Exception {
+
+        log.info("testFindByName()");
+
+        boolean VALUE_EXPECTED = false;
+        List<Categoria> categorias = categoriaService.findByName("Procesadores");
+
+        categorias.stream().forEach(item -> log.info(item.toString()));
+
+        assertEquals(VALUE_EXPECTED, categorias.isEmpty());
+
+    }
+
+
 }
